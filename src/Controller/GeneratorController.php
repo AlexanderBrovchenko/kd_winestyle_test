@@ -16,6 +16,8 @@ class GeneratorController extends AbstractController
     public function generate(string $name, string $sizecode)
     {
         $fullname = null;
+        if(!is_dir("Cache"))
+            mkdir("Cache", 0777);
         $name_for_cache = 'Cache/' . $name . '_' . $sizecode . '.jpg';
         if (!file_exists($name_for_cache)) {
             foreach (glob('Gallery/' . $name . '.*') as $file)
