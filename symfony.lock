@@ -81,6 +81,9 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
+    "mobiledetect/mobiledetectlib": {
+        "version": "2.8.34"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -492,6 +495,15 @@
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
         ]
+    },
+    "symfony/web-server-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
     },
     "symfony/yaml": {
         "version": "v5.1.8"

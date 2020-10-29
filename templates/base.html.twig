@@ -2,11 +2,156 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Brovchenko's Winstyle_test</title>{% endblock %}
+        <link rel="shortcut icon" href="Images/ico.png" type="image/png">
+        {% block stylesheets %}
+            <style>
+                body {
+                    background: url('Images/background.jpg') no-repeat center center fixed;
+                    background-size: cover;
+                }
+                .gallery_preview, .gallery-in {
+                    display: inline-block;
+                    margin: 10px;
+                    float: left;
+                }
+                .gallery-in {
+                    width: 100%;
+                }
+                .gallery-in p {
+                    text-align: center;
+                }
+                .image-container {
+                    width: {{ sizes.0.width }}px;
+                    height: {{ sizes.0.height }}px;
+                    transition: .3s;
+                    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+                }
+                .image-container, .in-container {
+                    text-align: center;
+                    vertical-align: middle;
+                    display: table-cell;
+                }
+                .image-container:hover {
+                    margin: 3px 5px;
+                    box-shadow: 0 7px 10px rgba(46, 46, 157, .4);
+                    transform: translateY(-5px);
+                }
+                .image-container img, .in-container img{
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: block;
+                    margin: 0 auto;
+                }
+                .popup-fade {
+                    display: none;
+                }
+                .popup-fade:before {
+                    content: '';
+                    background: #000;
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0.7;
+                    z-index: 9999;
+                }
+                .gallery-popup {
+                    position:fixed;
+                    top: 10%;
+                    left: 5%;
+                    padding: 20px;
+                    width: 85%;
+                    background-image: radial-gradient(lightyellow, lavender);
+                    background-size: 100%;
+                    border: 1px solid orange;
+                    border-radius: 4px;
+                    max-height: 75%;
+                    z-index: 99999;
+                    opacity: 1;
+                    overflow-y: scroll;
+                }
+                .popup-close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                }
+            </style>
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+            <script>
+                $(function() {
+                    $('.popup-open').on("click", function(e){
+                        e = e || window.event;
+                        e.preventDefault();
+                        var RealHint = $(this).data('hint');
+                        $(RealHint).show(1000);
+                        return false;
+                    });
+
+                    $('.popup-close').click(function() {
+                        $(this).parents('.popup-fade').hide({
+                            duration: 800,
+                            easing: "linear",
+                            queue: false
+                        });
+                        return false;
+                    });
+
+                    $(document).keydown(function(e) {
+                        if (e.keyCode === 27) {
+                            e.stopPropagation();
+                            $('.popup-fade').hide({
+                                duration: 800,
+                                easing: "linear",
+                                queue: false
+                            });
+                        }
+                    });
+
+                    $('.popup-fade').click(function(e) {
+                        if ($(e.target).closest('.popup').length == 0) {
+                            $(this).hide({
+                                duration: 800,
+                                easing: "linear",
+                                queue: false
+                            });
+                        }
+                    });
+                })
+            </script>
+        {% endblock %}
+        {% block body %}
+            {% for key, value in filenames %}
+            <div class="gallery_preview">
+                <div class="image-container">
+                    <a href="#" class="popup-open" data-hint="#fade-{{ value }}" >
+                        <img src="../generator.php/{{ value }}/{{ sizes.0.code }}"/>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% for key, value in filenames %}
+                <div class="popup-fade" id="fade-{{ value }}">
+                    <div class="popup">
+                        <div class="gallery-popup">
+                            <a class="popup-close" href="#">Close</a>
+                            {% for inkey, invalue in sizes %}
+                                <div class="gallery-in">
+                                    <center><div class="in-container" style="width: {{ invalue.width }}px; height: {{ invalue.height }}px;">
+                                        <img src="../generator.php/{{ value }}/{{ invalue.code }}"/>
+                                    </div>
+                                    <p>{{ invalue.width }} x {{ invalue.height }} px</p></center>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endblock %}
     </body>
 </html>
