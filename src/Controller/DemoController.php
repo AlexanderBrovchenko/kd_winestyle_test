@@ -30,8 +30,12 @@ class DemoController extends AbstractController
             $sizes = $sizeRepository->$methodname();
         }
         $filenames = array();
-        foreach (glob('Gallery/*.*') as $filename)
-            $filenames[] = basename($filename, "." . pathinfo($filename, PATHINFO_EXTENSION));
+        $possibles = array('GIF', 'JPG', 'PNG', 'WBMP', 'XBM', 'WEBP');
+        foreach (glob('Gallery/*.*') as $filename) {
+            $extention = pathinfo($filename, PATHINFO_EXTENSION);
+            if (in_array(strtoupper($extention), $possibles))
+                $filenames[] = basename($filename, "." . $extention);
+        }
         return $this->render('base.html.twig', [
             'filenames' => $filenames,
             'sizes' => $sizes
