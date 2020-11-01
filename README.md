@@ -2,7 +2,7 @@
 <p>
 </p>
 
-> Testin project for Winestyle.ru company
+> Testing project for Winestyle.ru company
 
 ##Requirements
 
