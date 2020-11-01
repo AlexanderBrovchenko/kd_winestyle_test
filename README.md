@@ -4,7 +4,7 @@
 
 > Testing project for Winestyle.ru company
 
-##Requirements
+## Requirements
 
 - PHP >= 5.4
 - GD PHP Extension
@@ -15,9 +15,8 @@
 
 1. Clone the project from GitHub:
 
-
-     $ cd YOUR_WEBSITE_FOLDER
-     $ git clone https://gihub.com/AlexanderBrovchenko/kd_winestyle_test.git
+        $ cd YOUR_WEBSITE_FOLDER
+        $ git clone https://gihub.com/AlexanderBrovchenko/kd_winestyle_test.git
 
  2a. (if needed) Install Composer (see http://getcomposer.org/download)
 
@@ -43,7 +42,7 @@
 
  7. Feel free to change/reset public/Gallery folder with your image files and some other ones
 
- 8. Open "http://127.0.0.1/demo.php" URL in your browser or connect to it from some mobile device
+ 8. Open "http://127.0.0.1:8000/demo.php" URL in your browser or connect to it from some mobile device
 
  ## Author
 
