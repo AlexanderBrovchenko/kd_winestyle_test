@@ -6,7 +6,7 @@
 
 ## Requirements
 
-- PHP >= 5.4
+- PHP >= 7.2
 - GD PHP Extension
 - MYSQL >= 5
 - And the [usual Symfony application requirements](https://symfony.com/doc/current/reference/requirements)
@@ -22,6 +22,7 @@
 
  2. Install the project via Composer
 
+        $ cd kd_winestyle_test
         $ composer install
 
   3. Create an empty MySQL database
